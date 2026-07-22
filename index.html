@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --cream:#FBF3E7;
+      --paper:#FFFDF8;
+      --ink:#33262E;
+      --ink-soft:#6b5c63;
+      --berry:#E24B6B;
+      --berry-deep:#B93450;
+      --gold:#F0A93D;
+      --sage:#7FA37F;
+    }
+
+    *{ margin:0; padding:0; box-sizing:border-box; }
+
+    body{
+      min-height:100vh;
+      overflow-x:hidden;
+      font-family:'Gowun Dodum', sans-serif;
+      color:var(--ink);
+      background:
+              radial-gradient(circle at 15% 20%, rgba(240,169,61,0.16), transparent 40%),
+              radial-gradient(circle at 85% 80%, rgba(226,75,107,0.14), transparent 45%),
+              var(--cream);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:40px 16px;
+      position:relative;
+    }
+
+    /* ---------- ambient background ---------- */
+    .ambient{ position:fixed; inset:0; pointer-events:none; z-index:0; }
+
+    .balloon{
+      position:absolute;
+      bottom:-140px;
+      width:46px;
+      height:60px;
+      border-radius:50% 50% 50% 50% / 55% 55% 45% 45%;
+      opacity:.55;
+      animation:floatUp linear infinite;
+    }
+    .balloon::after{
+      content:"";
+      position:absolute;
+      width:1px;
+      height:60px;
+      background:rgba(51,38,46,.25);
+      left:50%;
+      top:60px;
+    }
+    @keyframes floatUp{
+      from{ transform:translateY(0) translateX(0); }
+      50%{ transform:translateY(-60vh) translateX(20px); }
+      to{ transform:translateY(-130vh) translateX(-10px); }
+    }
+
+    .confetti-piece{
+      position:absolute;
+      top:-20px;
+      width:8px;
+      height:14px;
+      opacity:.9;
+      animation:confettiFall linear forwards;
+    }
+    @keyframes confettiFall{
+      from{ transform:translateY(0) rotate(0deg); opacity:1; }
+      to{ transform:translateY(105vh) rotate(540deg); opacity:0; }
+    }
+
+    /* ---------- card ---------- */
+    .card{
+      position:relative;
+      z-index:1;
+      width:460px;
+      max-width:100%;
+      background:var(--paper);
+      border-radius:6px;
+      padding:52px 40px 44px;
+      text-align:center;
+      box-shadow:0 30px 60px -20px rgba(51,38,46,.28), 0 2px 0 rgba(51,38,46,.04);
+      border:1px solid rgba(51,38,46,.06);
+    }
+    .card::before, .card::after{
+      content:"";
+      position:absolute;
+      left:24px; right:24px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(226,75,107,.35), transparent);
+    }
+    .card::before{ top:14px; }
+    .card::after{ bottom:14px; }
+
+    .eyebrow{
+      display:inline-block;
+      font-size:12px;
+      letter-spacing:.35em;
+      color:var(--berry-deep);
+      text-transform:uppercase;
+      margin-bottom:14px;
+      font-family:'Gowun Dodum', sans-serif;
+    }
+
+    h1{
+      font-family:'Gowun Batang', serif;
+      font-weight:700;
+      font-size:42px;
+      line-height:1.25;
+      color:var(--ink);
+    }
+    h1 .name{ color:var(--berry); }
+
+    .subtitle{
+      margin-top:14px;
+      font-size:16px;
+      color:var(--ink-soft);
+      line-height:1.7;
+    }
+
+    /* ---------- cake & candles ---------- */
+    .cake-wrap{
+      margin:34px auto 6px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .candles{
+      display:flex;
+      gap:16px;
+      margin-bottom:-4px;
+    }
+    .candle{
+      width:8px;
+      height:34px;
+      background:linear-gradient(180deg, #fff, var(--gold));
+      border-radius:3px;
+      position:relative;
+      cursor:pointer;
+    }
+    .candle .flame{
+      position:absolute;
+      top:-16px;
+      left:50%;
+      transform:translateX(-50%);
+      width:12px;
+      height:18px;
+      background:radial-gradient(circle at 50% 30%, #fff6cf, var(--gold) 55%, var(--berry) 100%);
+      border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+      animation:flicker 1.4s ease-in-out infinite;
+      transition:opacity .2s, transform .2s;
+    }
+    .candle.out .flame{ opacity:0; transform:translateX(-50%) scale(.3); }
+    .candle.out{ box-shadow:none; }
+    @keyframes flicker{
+      0%,100%{ transform:translateX(-50%) scale(1) rotate(-2deg); }
+      50%{ transform:translateX(-50%) scale(1.08) rotate(3deg); }
+    }
+
+    .cake-body{
+      width:150px;
+      height:78px;
+      background:linear-gradient(180deg, #fff, #ffe7ee);
+      border:2px solid rgba(51,38,46,.08);
+      border-radius:10px 10px 16px 16px;
+      position:relative;
+      box-shadow:0 12px 24px -10px rgba(51,38,46,.25);
+    }
+    .cake-body::before{
+      content:"";
+      position:absolute;
+      top:-8px; left:0; right:0;
+      height:16px;
+      background:repeating-linear-gradient(90deg, var(--berry) 0 12px, var(--gold) 12px 24px);
+      border-radius:8px;
+    }
+
+    .cake-hint{
+      margin-top:16px;
+      font-size:13px;
+      color:var(--ink-soft);
+      letter-spacing:.02em;
+    }
+    .wish-msg{
+      margin-top:10px;
+      font-size:15px;
+      color:var(--sage);
+      font-weight:700;
+      opacity:0;
+      transform:translateY(6px);
+      transition:opacity .5s, transform .5s;
+    }
+    .wish-msg.show{ opacity:1; transform:translateY(0); }
+
+    /* ---------- seal button ---------- */
+    .seal-btn{
+      margin-top:34px;
+      width:88px;
+      height:88px;
+      border-radius:50%;
+      border:none;
+      cursor:pointer;
+      background:radial-gradient(circle at 35% 30%, #ef6b86, var(--berry-deep) 70%);
+      color:#fff;
+      font-family:'Gowun Batang', serif;
+      font-size:14px;
+      letter-spacing:.05em;
+      box-shadow:0 10px 20px -6px rgba(185,52,80,.55), inset 0 -4px 8px rgba(0,0,0,.15);
+      transition:transform .25s ease;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      line-height:1.3;
+    }
+    .seal-btn:hover{ transform:scale(1.06) rotate(-2deg); }
+    .seal-btn:active{ transform:scale(.96); }
+
+    /* ---------- letter ---------- */
+    .letter-panel{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .7s cubic-bezier(.4,0,.2,1);
+    }
+    .letter-panel.open{ max-height:none; }
+    .letter{
+      margin-top:30px;
+      padding:26px 24px;
+      background:#fff;
+      border:1px solid rgba(51,38,46,.08);
+      border-radius:4px;
+      text-align:left;
+      position:relative;
+    }
+    .letter::before{
+      content:"";
+      position:absolute;
+      top:0; left:0; right:0;
+      height:3px;
+      background:linear-gradient(90deg, var(--berry), var(--gold), var(--sage));
+    }
+    .letter h2{
+      font-family:'Gowun Batang', serif;
+      font-size:19px;
+      color:var(--berry-deep);
+      margin-bottom:14px;
+    }
+    .letter p{
+      font-size:15px;
+      line-height:1.9;
+      color:var(--ink);
+    }
+    .letter .sign-off{
+      margin-top:16px;
+      text-align:right;
+      font-size:14px;
+      color:var(--ink-soft);
+    }
+
+    @media (max-width:480px){
+      .card{ padding:40px 24px 32px; }
+      h1{ font-size:34px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .balloon, .confetti-piece, .candle .flame{ animation:none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="ambient" id="ambient"></div>
+
+<main class="card">
+  <span class="eyebrow">Special Day</span>
+  <h1><span class="name">현진</span>아<br>생일 축하해!</h1>
+  <p class="subtitle">오늘 하루 세상에서<br>가장 행복하게 보내!❤️</p>
+
+  <div class="cake-wrap">
+    <div class="candles" id="candles">
+      <div class="candle" data-i="0"><span class="flame"></span></div>
+      <div class="candle" data-i="1"><span class="flame"></span></div>
+      <div class="candle" data-i="2"><span class="flame"></span></div>
+    </div>
+    <div class="cake-body"></div>
+    <p class="cake-hint">소원을 생각하면서 촛불을 하나씩 눌러서 꺼봐 🕯️</p>
+    <p class="wish-msg" id="wishMsg">너의 소원이 다 이루어질거야🧞‍♂️</p>
+  </div>
+
+  <button class="seal-btn" id="sealBtn">💌<br>편지 열기</button>
+
+  <div class="letter-panel" id="letterPanel">
+    <div class="letter">
+      <h2>To. 현진 ❤️</h2>
+      <p>
+        현진아 생일 축하해!! 7/23일 너의 25번째 생일이야!!!<br><br>
+
+        이번 생일에는 너가 인스타 보내준거 생각나서 내가 그 인스타 퀄리티보다 좋게 준비해봤어 맘에 들었으면 좋겠당 이번 생일에는 손편지 대신 컴공식 편지인데 어떤지 알려줘<br><br>
+
+        너 생일 첫 스타트를 함께 할 수 있어서 너무 좋고 즐거웠어<br>
+
+        너 만나고 나서 든 생각이 난 너랑 놀때 젤 편하고 재밌는거 같아<br><br>
+
+        나랑 앞으로도 평생 같이 놀아줘야 돼 너 같은 친구가 있다는게 난 정말 행복한 사람인거 같아<br><br>
+
+        오늘 쌈밥집도 진짜 너무 맛있고 카페도 너무 예쁘고 기억에 남을 것 같아<br>
+
+        우리 8월에도 또 만납시당 졸업하면 더 바빠져서 여행 가기도 자주 만나기도 힘드니깐 지금 시간 있을때 최대한 자주 만나구 시퍼<br>
+
+        공부해야할 거 많으면 카공해두 좋구!<br><br>
+
+        오늘 생일에 오빠 만나서 가평 여행도 재밌게 하구 너가 세상에서 가장 행복한 하루가 되길! 💕 <br><br>생일 진심으로 축하해!!
+      </p>
+      <p class="sign-off">- 너의 베프 현진이가!!!</p>
+    </div>
+  </div>
+</main>
+
+<script>
+  // ambient balloons
+  const ambient = document.getElementById('ambient');
+  const colors = ["#E24B6B","#F0A93D","#7FA37F","#F6D8B8"];
+  for(let i=0;i<12;i++){
+    const b = document.createElement('div');
+    b.className = 'balloon';
+    b.style.left = Math.random()*100+"vw";
+    b.style.background = colors[Math.floor(Math.random()*colors.length)];
+    b.style.animationDuration = (14+Math.random()*8)+"s";
+    b.style.animationDelay = (Math.random()*10)+"s";
+    ambient.appendChild(b);
+  }
+
+  // candles
+  const candles = document.querySelectorAll('.candle');
+  const wishMsg = document.getElementById('wishMsg');
+  let blownCount = 0;
+
+  candles.forEach(c=>{
+    c.addEventListener('click', ()=>{
+      if(c.classList.contains('out')) return;
+      c.classList.add('out');
+      blownCount++;
+      if(blownCount === candles.length){
+        wishMsg.classList.add('show');
+        burstConfetti();
+      }
+    });
+  });
+
+  function burstConfetti(){
+    for(let i=0;i<40;i++){
+      const p = document.createElement('div');
+      p.className = 'confetti-piece';
+      p.style.left = Math.random()*100+"vw";
+      p.style.background = colors[Math.floor(Math.random()*colors.length)];
+      p.style.animationDuration = (2.5+Math.random()*2)+"s";
+      p.style.animationDelay = (Math.random()*0.6)+"s";
+      ambient.appendChild(p);
+      setTimeout(()=>p.remove(), 5000);
+    }
+  }
+
+  // letter reveal
+  const sealBtn = document.getElementById('sealBtn');
+  const letterPanel = document.getElementById('letterPanel');
+  sealBtn.addEventListener('click', ()=>{
+    const willOpen = !letterPanel.classList.contains('open');
+    if(willOpen){
+      letterPanel.style.maxHeight = letterPanel.scrollHeight + "px";
+      letterPanel.classList.add('open');
+      sealBtn.innerHTML = "💌<br>편지 닫기";
+      setTimeout(()=>{ letterPanel.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 150);
+    } else {
+      letterPanel.style.maxHeight = letterPanel.scrollHeight + "px";
+      requestAnimationFrame(()=>{
+        letterPanel.classList.remove('open');
+        letterPanel.style.maxHeight = "0px";
+      });
+      sealBtn.innerHTML = "💌<br>편지 열기";
+    }
+  });
+</script>
+
+</body>
+</html>
